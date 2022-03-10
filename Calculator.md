@@ -8,8 +8,11 @@ public class calculate {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
         var expression = line.split(" ");
-        int fnum;
-        int snum;
+        if (expression.length < 3) {
+            System.out.println("Нехватает значений");
+        }
+        int fnum = 0;
+        int snum = 0;
         String op;
         op = expression[1];
 
@@ -25,12 +28,16 @@ public class calculate {
         roman.put("VIII", "8");
         roman.put("IX", "9");
         roman.put("X", "10");
-        if (roman.containsKey(expression[0])) {
-            fnum = Integer.parseInt(roman.get(expression[0]));}
-        else { fnum = Integer.parseInt(expression[0]);}
-        if (roman.containsKey(expression[2])) {
-            snum = Integer.parseInt(roman.get(expression[2]));}
-        else { snum = Integer.parseInt(expression[2]);}
+
+        if (roman.containsKey(expression[0]) & roman.containsKey(expression[2])) {
+            fnum = Integer.parseInt(roman.get(expression[0]));
+            snum = Integer.parseInt(roman.get(expression[2]));
+        }  if (!(roman.containsKey(expression[0])) & !(roman.containsKey(expression[2]))) {
+            fnum = Integer.parseInt(expression[0]);
+            snum = Integer.parseInt(expression[2]);
+        } else {
+            System.out.println("Введены числа разных типов");
+        }
 
         switch (op) {
             case "+" -> System.out.println(fnum + snum);
@@ -41,5 +48,4 @@ public class calculate {
         }
 
     }
-
 }
